@@ -21,9 +21,9 @@ namespace CluedIn.Crawling.Salesforce.Core.Models
         public string BillingCountryCode { get; set; }
         [QueryIgnore]
         public string BillingGeocodeAccuracy { get; set; }
-        [QueryIgnore]
+                [QueryIgnore]
         public string BillingLatitude { get; set; }
-        [QueryIgnore]
+                [QueryIgnore]
         public string BillingLongitude { get; set; }
         public string BillingPostalCode { get; set; }
         public string BillingState { get; set; }
@@ -50,7 +50,7 @@ namespace CluedIn.Crawling.Salesforce.Core.Models
         public string LastActivityDate { get; set; }
         [QueryIgnore]
         public string LastReferencedDate { get; set; }
-        [QueryIgnore]
+                [QueryIgnore]
         public string LastViewedDate { get; set; }
         public string MasterRecordId { get; set; }
         public string NaicsCode { get; set; }
@@ -63,7 +63,7 @@ namespace CluedIn.Crawling.Salesforce.Core.Models
         public string Ownership { get; set; }
         public string ParentId { get; set; }
         public string Phone { get; set; }
-        [QueryIgnore]
+                       [QueryIgnore]
         public string PhotoUrl { get; set; }
         public string Rating { get; set; }
         [QueryIgnore]
@@ -78,9 +78,9 @@ namespace CluedIn.Crawling.Salesforce.Core.Models
         public string ShippingCountryCode { get; set; }
         [QueryIgnore]
         public string ShippingGeocodeAccuracy { get; set; }
-        [QueryIgnore]
+                  [QueryIgnore]
         public string ShippingLatitude { get; set; }
-        [QueryIgnore]
+                  [QueryIgnore]
         public string ShippingLongitude { get; set; }
         public string ShippingPostalCode { get; set; }
         public string ShippingState { get; set; }
@@ -168,63 +168,5 @@ namespace CluedIn.Crawling.Salesforce.Core.Models
         public string PersonTitle { get; set; }
         [QueryIgnore]
         public string Suffix { get; set; }
-        public string AgePc { get; set; }
-        public string AudiIdC { get; set; }
-        public string BouncedPc { get; set; }
-        public string BrandPc { get; set; }
-        public string Brand2Pc { get; set; }
-        public string BuyingTimeframePc { get; set; }
-        public string CompanySizePc { get; set; }
-        public string ContactRolePc { get; set; }
-        public string CurrentCarBrandPc { get; set; }
-        public string CustomerCityC { get; set; }
-        public string CvrC { get; set; }
-        public string DeadC { get; set; }
-        public string DealershipidC { get; set; }
-        public string HashedEmailPc { get; set; }
-        public string IdEmailC { get; set; }
-        public string IdEmailPc { get; set; }
-        public string IdentityKitIdPc { get; set; }
-        public string IdentityKitIdC { get; set; }
-        public string IdNgC { get; set; }
-        public string IdNgPc { get; set; }
-        public string IndustryPc { get; set; }
-        public string InteractionScoreCalculatedPc { get; set; }
-        public string InteractionScoreLastUpdatedPc { get; set; }
-        public string InteractionScorePc { get; set; }
-        public string IsActiveUserPc { get; set; }
-        public string IsKukCustomerC { get; set; }
-        public string IsMarketingContactPc { get; set; }
-        public string IsPartnerPc { get; set; }
-        public string KukCodeC { get; set; }
-        public string KukCustomerIdC { get; set; }
-        public string LeadReassignmentC { get; set; }
-        public string MarketingContactHemKeyC { get; set; }
-        public string MarketingContactKeyC { get; set; }
-        public string McApiErrorPc { get; set; }
-        public string McApiStatusPc { get; set; }
-        public string NumberOfCarsPc { get; set; }
-        public string OrderedLicensesC { get; set; }
-        public string PartnerExtidC { get; set; }
-        public string PhoneFormulaC { get; set; }
-        public string PostBoxNameC { get; set; }
-        public string PreferedOwnershipPc { get; set; }
-        public string ResidenseRegionPc { get; set; }
-        public string RobinsonC { get; set; }
-        public string SeatIdC { get; set; }
-        public string SkodaIdC { get; set; }
-        public string StartedUsingSfC { get; set; }
-        public string VwEIdCC { get; set; }
-        public string VwIdC { get; set; }
-        public string PersonContactIdC { get; set; }
-        public string PersonDonotCall { get; set; }
-        public string PersonEmailBouncedReason { get; set; }
-        public string PersonHasOptedOutOfFax { get; set; }
-        public string PersonMailingCountry { get; set; }
-        public string PersonMailingCountryCode { get; set; }
-        public string PersonMailingPostalCode { get; set; }
-        public string PersonMailingState { get; set; }
-        public string PersonMailingStateCode { get; set; }
-        public string PersonOtherAddress { get; set; }
     }
 }
