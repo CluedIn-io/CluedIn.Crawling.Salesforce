@@ -13,7 +13,6 @@
     <PackageReference Include="CluedIn.Core.Agent" />
     <PackageReference Include="CluedIn.Server.Common.WebApi" />
     <PackageReference Include="CluedIn.Agent" />
-    <PackageReference Include="CluedIn.Server.WebApi" />
     <PackageReference Include="DeveloperForce.Force" />
   </ItemGroup>
 </Project>
