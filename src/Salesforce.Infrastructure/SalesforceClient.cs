@@ -64,49 +64,62 @@ namespace CluedIn.Crawling.Salesforce.Infrastructure
 
         public IEnumerable<T> Get<T>(string query) where T : SystemObject
         {
-            var accts = new List<T>();
             var typeName = ((DisplayNameAttribute)typeof(T).GetCustomAttribute(typeof(DisplayNameAttribute))).DisplayName;
+            string nextRecordsUrl;
+            global::Salesforce.Common.Models.Json.QueryResult<T> results;
 
             try
             {
                 var qry = string.Empty;
                 if (_jobData.LastCrawlFinishTime > DateTimeOffset.MinValue)
                 {
-                    qry = string.Format("SELECT {0} FROM "+ query + " WHERE SystemModStamp >= {1}", GetObjectFieldsSelectList(typeName), _jobData.LastCrawlFinishTime.AddDays(-2).ToString("o"));
+                    qry = string.Format("SELECT {0} FROM " + query + " WHERE SystemModStamp >= {1}", GetObjectFieldsSelectList(typeName), _jobData.LastCrawlFinishTime.AddDays(-2).ToString("o"));
                 }
                 else
                 {
-                    qry = string.Format("SELECT {0} FROM "+ query + " LIMIT 10", GetObjectFieldsSelectList(typeName)); //ToDo: Husk at fjerne LIMIT 10, dette er kun til testformål for at begrænse datasættet og dermed performance
+                    qry = string.Format("SELECT {0} FROM " + query, GetObjectFieldsSelectList(typeName)); //ToDo: Husk at fjerne LIMIT 10, dette er kun til testformål for at begrænse datasættet og dermed performance
                 }
 
-                var results = salesforceClient.QueryAsync<T>(qry).Result;
-                var nextRecordsUrl = results.NextRecordsUrl;
-                accts.AddRange(results.Records);
+                results = salesforceClient.QueryAsync<T>(qry).Result;
+                nextRecordsUrl = results.NextRecordsUrl;
 
-                while (!string.IsNullOrEmpty(nextRecordsUrl))
-                {
-                    var continuationResults = salesforceClient.QueryContinuationAsync<T>(nextRecordsUrl).Result;
-                    accts.AddRange(continuationResults.Records);
-
-                    if (string.IsNullOrEmpty(continuationResults.NextRecordsUrl))
-                        yield break;
-
-                    //pass nextRecordsUrl back to client.QueryAsync to request next set of records
-                    nextRecordsUrl = continuationResults.NextRecordsUrl;
-                }
 
             }
             catch (Exception ex)
             {
                 _log.LogError("Could not fetch Salesforce Data", ex);
-                    yield break;
+                yield break;
             }
 
-
-            foreach (var result in accts)
+            foreach (var result in results.Records)
             {
                 yield return result;
             }
+
+            while (!string.IsNullOrEmpty(nextRecordsUrl))
+            {
+                try
+                {
+                    results = salesforceClient.QueryContinuationAsync<T>(nextRecordsUrl).Result;
+                }
+                catch (Exception ex)
+                {
+                    _log.LogError("Could not fetch Salesforce Data", ex);
+                    yield break;
+                }
+                foreach (var item in results.Records)
+                {
+                    yield return item;
+                }
+
+                if (string.IsNullOrEmpty(results.NextRecordsUrl))
+                    yield break;
+
+                //pass nextRecordsUrl back to client.QueryAsync to request next set of records
+                nextRecordsUrl = results.NextRecordsUrl;
+            }
+
+
 
         }
 
