@@ -34,16 +34,51 @@ namespace CluedIn.Crawling.Salesforce.Core
         public const string Details = "";
         public static AuthMethods AuthMethods = new AuthMethods()
         {
-            token = new Control[]
+            credentials = new Control[]
             {
         // You can define controls to show in the GUI in order to authenticate with this integration
-        //        new Control()
-        //        {
-        //            displayName = "API key",
-        //            isRequired = false,
-        //            name = "api",
-        //            type = "text"
-        //        }
+                new Control()
+                {
+                    displayName = "Url",
+                    isRequired = true,
+                    name = "ApiKey",
+                    type = "text"
+                },
+                new Control()
+                {
+                    displayName = "Grant Type",
+                    isRequired = true,
+                    name = "GrantType",
+                    type = "text"
+                },
+                new Control()
+                {
+                    displayName = "Client Id",
+                    isRequired = true,
+                    name = "ClientId",
+                    type = "text"
+                },
+                new Control()
+                {
+                    displayName = "Client Secret",
+                    isRequired = true,
+                    name = "ClientSecret",
+                    type = "text"
+                },
+                new Control()
+                {
+                    displayName = "Username",
+                    isRequired = true,
+                    name = "UserName",
+                    type = "text"
+                },
+                new Control()
+                {
+                    displayName = "Password",
+                    isRequired = true,
+                    name = "Password",
+                    type = "password"
+                }
             }
         };
 
