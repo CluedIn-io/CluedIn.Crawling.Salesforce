@@ -233,6 +233,11 @@ namespace CluedIn.Provider.Salesforce
                 //TODO add the transformations from specific CrawlJobData object to dictionary
                 // add tests to GetHelperConfigurationBehaviour.cs
                 dictionary.Add(SalesforceConstants.KeyName.ApiKey, salesforceCrawlJobData.ApiKey);
+                dictionary.Add(SalesforceConstants.KeyName.UserName, salesforceCrawlJobData.UserName);
+                dictionary.Add(SalesforceConstants.KeyName.Password, salesforceCrawlJobData.Password);
+                dictionary.Add(SalesforceConstants.KeyName.ClientId, salesforceCrawlJobData.ClientId);
+                dictionary.Add(SalesforceConstants.KeyName.ClientSecret, salesforceCrawlJobData.ClientSecret);
+                dictionary.Add(SalesforceConstants.KeyName.GrantType, salesforceCrawlJobData.GrantType);
             }
 
             return await Task.FromResult(dictionary);
