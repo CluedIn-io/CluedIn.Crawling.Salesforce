@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DuplicateEntityEANNumberQuery.cs" company="Clued In">
+// <copyright file="DuplicateEntityCVRNumberQuery.cs" company="Clued In">
 //   Copyright (c) 2019 Clued In. All rights reserved.
 // </copyright>
 // <summary>
-//   Implements the duplicate entity EAN Number query class.
+//   Implements the duplicate entity CVR Number query class.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -21,11 +21,11 @@ using Core.Data.Repositories.Search.Filtering;
 
 namespace CluedIn.Processing.EntityResolution.Queries
 {
-    public class DuplicateEntityEANNumberQuery : IOnlineDuplicateEntityQuery
+    public class DuplicateEntityBusinessCVRNumberQuery : IOnlineDuplicateEntityQuery
     {
-        public string Name { get; } = "EAN Number";
+        public string Name { get; } = "Business CVR Number";
 
-        public string DisplayName { get; } = "Customer EAN numbers";
+        public string DisplayName { get; } = "Business Customer CVR numbers";
 
         public async Task<IEnumerable<IDuplicateEntityQueryResultSet>> GetPotentialDuplicatesAsync(ExecutionContext context, EntityType entityType = null)
         {
@@ -60,9 +60,9 @@ namespace CluedIn.Processing.EntityResolution.Queries
             {
                 var query = new ParsedQuery();
                 query.Query = "*";
-                query.Fields = new List<string>() { "properties.semler.customer.EANNumber" };
+                query.Fields = new List<string>() { "properties.semler.businesscustomer.CVRNumber" };
                 query.Cursor = PagingCursor.Default;
-                query.Aggregations = new List<AggregationQuery>() { new TermAggregationQuery("properties.semler.customer.EANNumber", 150) };
+                query.Aggregations = new List<AggregationQuery>() { new TermAggregationQuery("properties.semler.businesscustomer.CVRNumber", 150) };
                 query.RankingSettings = ParsedQuery.DefaultRanking;
                 query.IncludeUnstructuredData = !ConfigurationManagerEx.AppSettings.GetFlag("Feature.Filters.ShadowEntities", true);
                 query.OptionalFields = new List<string>();
@@ -106,7 +106,7 @@ namespace CluedIn.Processing.EntityResolution.Queries
 
             var query = new ParsedQuery();
             query.Query = "*";
-            query.Fields = new List<string>() { "properties.semler.customer.EANNumber" };
+            query.Fields = new List<string>() { "properties.semler.businesscustomer.CVRNumber" };
             query.Cursor = cursor;
             query.RankingSettings = ParsedQuery.DefaultRanking;
             query.IncludeUnstructuredData = !ConfigurationManagerEx.AppSettings.GetFlag("Feature.Filters.ShadowEntities", true);
@@ -124,8 +124,8 @@ namespace CluedIn.Processing.EntityResolution.Queries
                                                                                  },
                                                                                  new FilterQuery()
                                                                                  {
-                                                                                     FieldName       = "properties.semler.customer.EANNumber",
-                                                                                     AggregationName = "properties.semler.customer.EANNumber",
+                                                                                     FieldName       = "properties.semler.businesscustomer.CVRNumber",
+                                                                                     AggregationName = "properties.semler.businesscustomer.CVRNumber",
                                                                                      Operator        = DefaultSearchOperator.And,
                                                                                      Value           = itemGroupingKey
                                                                                  }

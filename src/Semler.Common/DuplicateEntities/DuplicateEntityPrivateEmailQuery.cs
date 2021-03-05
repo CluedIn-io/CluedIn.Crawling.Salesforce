@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DuplicateEntityHomePhoneQuery.cs" company="Clued In">
+// <copyright file="DuplicateEntityEmailQuery.cs" company="Clued In">
 //   Copyright (c) 2019 Clued In. All rights reserved.
 // </copyright>
 // <summary>
-//   Implements the duplicate entity Home Phone query class.
+//   Implements the duplicate entity Email query class.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -21,11 +21,11 @@ using Core.Data.Repositories.Search.Filtering;
 
 namespace CluedIn.Processing.EntityResolution.Queries
 {
-    public class DuplicateEntityHomePhoneQuery : IOnlineDuplicateEntityQuery
+    public class DuplicateEntityPrivateEmailQuery : IOnlineDuplicateEntityQuery
     {
-        public string Name { get; } = "Home Phone";
+        public string Name { get; } = "Private Email";
 
-        public string DisplayName { get; } = "Customer home phones";
+        public string DisplayName { get; } = "Private Customer emails";
 
         public async Task<IEnumerable<IDuplicateEntityQueryResultSet>> GetPotentialDuplicatesAsync(ExecutionContext context, EntityType entityType = null)
         {
@@ -60,9 +60,9 @@ namespace CluedIn.Processing.EntityResolution.Queries
             {
                 var query = new ParsedQuery();
                 query.Query = "*";
-                query.Fields = new List<string>() { "properties.semler.customer.HomePhoneNr" };
+                query.Fields = new List<string>() { "properties.semler.privatecustomer.Email" };
                 query.Cursor = PagingCursor.Default;
-                query.Aggregations = new List<AggregationQuery>() { new TermAggregationQuery("properties.semler.customer.HomePhoneNr", 150) };
+                query.Aggregations = new List<AggregationQuery>() { new TermAggregationQuery("properties.semler.privatecustomer.Email", 150) };
                 query.RankingSettings = ParsedQuery.DefaultRanking;
                 query.IncludeUnstructuredData = !ConfigurationManagerEx.AppSettings.GetFlag("Feature.Filters.ShadowEntities", true);
                 query.OptionalFields = new List<string>();
@@ -106,7 +106,7 @@ namespace CluedIn.Processing.EntityResolution.Queries
 
             var query = new ParsedQuery();
             query.Query = "*";
-            query.Fields = new List<string>() { "properties.semler.customer.HomePhoneNr" };
+            query.Fields = new List<string>() { "properties.semler.privatecustomer.Email" };
             query.Cursor = cursor;
             query.RankingSettings = ParsedQuery.DefaultRanking;
             query.IncludeUnstructuredData = !ConfigurationManagerEx.AppSettings.GetFlag("Feature.Filters.ShadowEntities", true);
@@ -124,8 +124,8 @@ namespace CluedIn.Processing.EntityResolution.Queries
                                                                                  },
                                                                                  new FilterQuery()
                                                                                  {
-                                                                                     FieldName       = "properties.semler.customer.HomePhoneNr",
-                                                                                     AggregationName = "properties.semler.customer.HomePhoneNr",
+                                                                                     FieldName       = "properties.semler.privatecustomer.Email",
+                                                                                     AggregationName = "properties.semler.privatecustomer.Email",
                                                                                      Operator        = DefaultSearchOperator.And,
                                                                                      Value           = itemGroupingKey
                                                                                  }
