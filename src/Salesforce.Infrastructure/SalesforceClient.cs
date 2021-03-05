@@ -116,7 +116,10 @@ namespace CluedIn.Crawling.Salesforce.Infrastructure
             }
             else
             {
-                Get<Account>(recordTypeId, kukCustomerID);
+                foreach (var item in Get<T>(recordTypeId, kukCustomerID))
+                {
+                    yield return item;
+                }
             }
         }
 
